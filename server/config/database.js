@@ -3,6 +3,9 @@ const User = require('../data/User')
 
 mongoose.Promise = global.Promise
 
+require('../data/Threads')
+require('../data/Comments')
+
 module.exports = (settings) => {
   mongoose.connect(settings.db)
 
