@@ -33,6 +33,17 @@ module.exports = {
               res.locals.globalError = message
               res.render('threads/add', threadReq)
             })
+  },
+  allThreads: (req, res) => {
+    let allThreads = Thread.find({})
+
+    allThreads
+                    .sort('-date')
+                    .then(threads => {
+                      res.render('threads/all', {
+                        threads: threads
+                      })
+                    })
   }
 
 }
