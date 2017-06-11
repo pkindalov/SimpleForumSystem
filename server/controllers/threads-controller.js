@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
 const Thread = mongoose.model('Thread')
-// const Answers = require('../data/Answers')
-// const errorHandler = require('../utilities/error-handler')
 const errorHandler = require('../utilities/error-handler')
 
 module.exports = {
@@ -26,7 +24,7 @@ module.exports = {
               date: threadReq.date
             })
             .then(thread => {
-              res.redirect('threads/all')
+              res.redirect('/threads/all')
             })
             .catch(err => {
               let message = errorHandler.handleMongooseError(err)
@@ -38,12 +36,26 @@ module.exports = {
     let allThreads = Thread.find({})
 
     allThreads
-                    .sort('-date')
                     .then(threads => {
                       res.render('threads/all', {
                         threads: threads
                       })
                     })
+  },
+
+  getDetails: (req, res) => {
+    let id = req.params.id
+
+    Thread
+            .findById(id)
+            .populate('answers')
+            .then(thread => {
+              console.log(thread)
+              res.render('threads/details', {
+                thread: thread,
+                answers: thread.answers
+              })
+            })
   }
 
 }
