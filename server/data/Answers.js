@@ -1,11 +1,13 @@
 const mongoose = require('mongoose')
-const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required'
+const ObjectId = mongoose.Schema.Types.ObjectId
+// const REQUIRED_VALIDATION_MESSAGE = '{PATH} is required'
 
 let answersShema = new mongoose.Schema({
-  answer: {type: String, required: REQUIRED_VALIDATION_MESSAGE},
-  date: {type: Date, default: Date.now()}
+  answer: {type: String},
+  date: {type: Date, default: Date.now()},
+  thread: {type: ObjectId, ref: 'Threads'}
 })
 
-let Answer = mongoose.model('Comment', answersShema)
+let Answer = mongoose.model('Answer', answersShema)
 
 module.exports = Answer
