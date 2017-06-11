@@ -13,6 +13,9 @@ module.exports = (app) => {
   app.get('/threads/add', auth.isAuthenticated, controllers.threads.addTreadGet)
   app.post('/threads/add', auth.isAuthenticated, controllers.threads.addTreadPost)
   app.get('/threads/all', controllers.threads.allThreads)
+  app.get('/post/:id/:title', controllers.threads.getDetails)
+  app.get('/add/answer/:id', controllers.answers.addComment)
+  app.post('/add/answer/:id', controllers.answers.postComment)
 
   app.all('*', (req, res) => {
     res.status(404)
