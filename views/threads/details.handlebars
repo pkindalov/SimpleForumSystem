@@ -1,0 +1,17 @@
+ <div>
+        <h2>Title:</h2><br />
+             {{thread.title}}
+        <h2>Date:</h2>
+            {{thread.date}}
+        <h2>Description:</h2>
+            {{thread.description}}<br />
+
+
+            {{#each answers}}
+                <div>
+                    {{answer}}
+                </div>
+            {{/each}}
+         <a href="/add/answer/{{thread._id}}">Add Comment</a>
+        
+    </div>
