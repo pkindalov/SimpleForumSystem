@@ -2,14 +2,25 @@
 
 
 {{#each threads}}
-    <div>
-        <h2>Title:</h2><br />
-             {{title}}
-        <h2>Date:</h2>
-            {{date}}
-        <h2>Description:</h2>
-            {{description}}<br />
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h4>Title:</h4><br />
+                 <p>{{title}}</p>
+            <hr />     
+            <h4>Date:</h4>
+                <p>{{date}}</p>
+            <hr />   
+            <h4>Description:</h4>
+                <p>{{description}}</p>
+             <hr />
+             
+                {{!--<h4>Author:</h4>  
+                
+                    <p>{{user.username}}</p>
+                     <hr />       --}}
+                 
+            <a class="btn btn-default" href="/post/{{_id}}/{{title}}">Details</a>
+        </div>
 
-        <a href="/post/{{_id}}/{{title}}">Details</a>
     </div>
    {{/each}}
