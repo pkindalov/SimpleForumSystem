@@ -27,7 +27,8 @@ module.exports = {
 
               Answer
                         .create({
-                          answer: answer
+                          answer: answer,
+                          author: req.user._id
                         })
                         .then(answer => {
                           thread.answers.push(answer)
