@@ -6,7 +6,8 @@ let threadSchema = new mongoose.Schema({
   title: {type: String, required: REQUIRED_VALIDATION_MESSAGE},
   description: {type: String},
   date: {type: Date, default: Date.now()},
-  answers: [{type: ObjectId, ref: 'Answer'}]
+  answers: [{type: ObjectId, ref: 'Answer'}],
+  author: {type: ObjectId, ref: 'User'}
 })
 
 let Thread = mongoose.model('Thread', threadSchema)
