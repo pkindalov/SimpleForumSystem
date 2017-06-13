@@ -40,6 +40,34 @@ module.exports = {
                           console.log(message)
                         })
             })
+  },
+
+  listAnswersByLatestDate: (req, res) => {
+    Thread
+              .find({})
+              .populate('answers')
+              .populate('author')
+              .sort('-date')
+              .then(thread => {
+                // console.log(thread.author)
+                res.render('answers/list', {
+                  threads: thread
+                })
+              })
+    // Thread
+    //               .find({})
+    //               .then(thread => {
+    //                 console.log(thread)
+    //                 Answer
+    //                           .find({})
+    //                           .sort('-date')
+    //                           .then(answer => {
+    //                             res.render('answers/list', {
+    //                               threads: thread,
+    //                               answers: answer
+    //                             })
+    //                           })
+    //               })
   }
 
 }
