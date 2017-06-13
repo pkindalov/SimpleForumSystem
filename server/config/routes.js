@@ -16,6 +16,7 @@ module.exports = (app) => {
   app.get('/post/:id/:title', controllers.threads.getDetails)
   app.get('/add/answer/:id', controllers.answers.addComment)
   app.post('/add/answer/:id', controllers.answers.postComment)
+  app.get('/users/profile/:username', auth.isAuthenticated, controllers.users.getUserProfil)
 
   app.all('*', (req, res) => {
     res.status(404)
