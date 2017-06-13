@@ -1,5 +1,7 @@
 const encryption = require('../utilities/encryption')
 const User = require('mongoose').model('User')
+const Thread = require('mongoose').model('Thread')
+const errorHandler = require('../utilities/error-handler')
 
 module.exports = {
   registerGet: (req, res) => {
@@ -66,5 +68,55 @@ module.exports = {
   logout: (req, res) => {
     req.logout()
     res.redirect('/')
+  },
+
+  getUserProfil: (req, res) => {
+    // let userName = req.params.username
+    let id = req.user._id
+    console.log(id)
+
+    // Thread
+    //           .find({'author': ObjectId('id')})
+    //           .then(thread => {
+    //             console.log(thread)
+    //             User
+    //                     .findById(id)
+    //                     .then(user => {
+    //                       res.render('users/profil', {
+    //                         thread: thread,
+    //                         user: user
+    //                       })
+    //                     })
+    //           })
+
+    User
+          .findById(id)
+          .then(user => {
+            Thread
+                        .find({'author': id})
+                        .then(thread => {
+                          console.log(thread)
+                          res.render('users/profil', {
+                            thread: thread,
+                            user: user
+                          })
+                        })
+          })
+          .catch(err => {
+            let errMessage = errorHandler.handleMongooseError(err)
+            console.log(errMessage)
+          })
+
+    // User
+    //       .find({'username': userName})
+    //       .then(user => {
+    //         res.render('users/profil', {
+    //           user: user
+    //         })
+    //       })
+    //       .catch(err => {
+    //         let errMessage = errorHandler.handleMongooseError(err)
+    //         console.log(errMessage)
+    //       })
   }
 }
