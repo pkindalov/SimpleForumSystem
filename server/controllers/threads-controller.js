@@ -1,6 +1,8 @@
 const mongoose = require('mongoose')
 const Thread = mongoose.model('Thread')
+const User = mongoose.model('User')
 const errorHandler = require('../utilities/error-handler')
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 module.exports = {
   addTreadGet: (req, res) => {
@@ -21,7 +23,9 @@ module.exports = {
             .create({
               title: threadReq.title,
               description: threadReq.description,
-              date: threadReq.date
+              date: threadReq.date,
+              author: req.user._id
+
             })
             .then(thread => {
               res.redirect('/threads/all')
@@ -36,10 +40,17 @@ module.exports = {
     let allThreads = Thread.find({})
 
     allThreads
-                    .then(threads => {
-                      res.render('threads/all', {
-                        threads: threads
-                      })
+                    .then(thread => {
+                      User
+                          .find({})
+                          .where({'author': ObjectId(thread.author)})
+                          .then(user => {
+                            // console.log(user.username)
+                            res.render('threads/all', {
+                              threads: thread,
+                              user: user
+                            })
+                          })
                     })
   },
 
