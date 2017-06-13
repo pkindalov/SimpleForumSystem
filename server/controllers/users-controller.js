@@ -94,8 +94,10 @@ module.exports = {
           .then(user => {
             Thread
                         .find({'author': id})
+                        .populate('answers')
+                        // .populate('answers')
                         .then(thread => {
-                          console.log(thread)
+                          // console.log(thread)
                           res.render('users/profil', {
                             thread: thread,
                             user: user
