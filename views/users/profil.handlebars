@@ -1,0 +1,28 @@
+{{#each user}}
+    <div class="container">
+        <h1>
+            {{!--Hello, {{currentUser.username}}--}}
+            {{!--{{username}}--}}
+            {{username}}
+        </h1>
+    </div>
+
+{{/each}}
+
+
+<div class="container">
+    <h2>All Threads of {{user.username}}</h2>
+</div>
+
+{{#each thread}}
+    <div class="container-fluid">
+        <div class="jumbotron">
+            <h2>Title:</h2>
+                <p>{{title}}</p>
+            <h2>Description</h2>
+                <p>{{description}}</p>
+                <hr />
+
+        </div>
+    </div>
+{{/each}}
