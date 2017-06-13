@@ -12,9 +12,10 @@
     <div class="menu">
        
         <ul class="menu nav nav-tabs">
-            <li class="active"><a href="/">Home</a></li>
-            <li><a href="/about">About</a></li>
-            <li><a href="/threads/all">Threads</a></li>
+            <li class="active"><a href="/">HOME</a></li>
+            <li><a href="/about">ABOUT</a></li>
+            <li><a href="/threads/all">THREADS</a></li>
+            <li><a href="/answers/list">LIST</a></li>
             <li></li>
               {{#if currentUser}}
                 <li><a href="/users/profile/{{currentUser.username}}">{{currentUser.username}}</a></li>
@@ -22,10 +23,10 @@
                     <form id="logout-form" action="/users/logout" method="POST"></form>
                     <a href="javascript:document.getElementById('logout-form').submit()">Logout</a>
                 </li>
-                <li><a href="/threads/add">Create Thread</a></li>
+                <li><a href="/threads/add">CREATE THREAD</a></li>
             {{else}}
-                <li><a href="/users/register">Register</a></li>
-                <li><a href="/users/login">Login</a></li>
+                <li><a href="/users/register">REGISTER</a></li>
+                <li><a href="/users/login">LOGIN</a></li>
             {{/if}}
         </ul>
     </div>
