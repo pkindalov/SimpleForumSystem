@@ -28,7 +28,8 @@ module.exports = {
               Answer
                         .create({
                           answer: answer,
-                          author: req.user._id
+                          author: req.user._id,
+                          authorName: req.user.firstName
                         })
                         .then(answer => {
                           thread.answers.push(answer)
@@ -49,9 +50,21 @@ module.exports = {
               .populate('author')
               .sort('-date')
               .then(thread => {
-                // console.log(thread.author)
+                // console.log(thread)
+
+                let authorsNames = []
+                for (let i = 0; i < thread.length; i++) {
+                  authorsNames.push(thread[i].author.username)
+                }
+
+                console.log(authorsNames)
+                // User
+                //       .findById()
+                // console.log(thread[0].author._id)
+                // console.log(thread[0].author.username)
                 res.render('answers/list', {
-                  threads: thread
+                  threads: thread,
+                  authorsNames: authorsNames
                 })
               })
     // Thread
