@@ -6,7 +6,8 @@ let answersShema = new mongoose.Schema({
   answer: {type: String},
   date: {type: Date, default: Date.now()},
   thread: {type: ObjectId, ref: 'Threads'},
-  author: {type: ObjectId, ref: 'User'}
+  author: {type: ObjectId, ref: 'User'},
+  authorName: {type: String}
 })
 
 let Answer = mongoose.model('Answer', answersShema)
