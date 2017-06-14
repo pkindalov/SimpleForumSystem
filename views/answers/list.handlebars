@@ -13,10 +13,23 @@
         <hr />
         <h4>Comments:</h4>
         {{#each answers}}
-        <p>{{answer}}<br />
-              {{author}}
-        </p>
+        <p>"{{answer}}" - by {{authorName}}</</p>
+                            
         {{/each}}
+
+       
+
+        <h2>Thread Autor:</h2>
+         <p> {{author.username}}</p>
     </div>    
 </div>        
 {{/each}}
+
+
+
+<hr />
+         
+
+ {{!--{{#each authorsNames}}
+        <h1>{{this}}</h1> 
+{{/each}}--}}
