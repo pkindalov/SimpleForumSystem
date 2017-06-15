@@ -21,10 +21,9 @@
                  
             <a class="btn btn-default" href="/post/{{_id}}/{{title}}">DETAILS</a>
             {{#if ../isAdmin}}
-            <a class="btn btn-danger" href="#">DELETE</a>
-            <a class="btn btn-warning" href="#">EDIT</a>
+            <a class="btn btn-warning" href="/post/edit/{{_id}}/{{title}}">EDIT</a>
+            <a class="btn btn-danger" href="/post/delete/{{_id}}/{{title}}">DELETE</a>
             {{/if}}
         </div>
-
     </div>
    {{/each}}
