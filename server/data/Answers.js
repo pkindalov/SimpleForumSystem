@@ -4,7 +4,7 @@ const ObjectId = mongoose.Schema.Types.ObjectId
 
 let answersShema = new mongoose.Schema({
   answer: {type: String},
-  date: {type: Date, default: Date.now()},
+  date: {type: Date, default: Date.now},
   thread: {type: ObjectId, ref: 'Threads'},
   author: {type: ObjectId, ref: 'User'},
   authorName: {type: String}
