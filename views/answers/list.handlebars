@@ -29,7 +29,10 @@
 
 <hr />
          
+{{#if hasPrevPage}}
+    <a class="btn btn-primary" href="/answers/list?page={{prevPage}}">PREV</a>
+{{/if}}         
 
- {{!--{{#each authorsNames}}
-        <h1>{{this}}</h1> 
-{{/each}}--}}
+{{#if hasNextPage}}
+    <a class="btn btn-primary" href="/answers/list?page={{nextPage}}">NEXT</a>
+{{/if}}    

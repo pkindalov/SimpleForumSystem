@@ -45,11 +45,16 @@ module.exports = {
   },
 
   listAnswersByLatestDate: (req, res) => {
+    let pageSize = 2
+    let page = parseInt(req.query.page) || 1
+
     Thread
               .find({})
               .populate('answers')
               .populate('author')
               .sort('-date')
+              .skip((page - 1) * pageSize)
+              .limit(pageSize)
               .then(thread => {
                 // console.log(thread)
 
@@ -64,7 +69,11 @@ module.exports = {
                 // console.log(thread[0].author._id)
                 // console.log(thread[0].author.username)
                 res.render('answers/list', {
-                  threads: thread
+                  threads: thread,
+                  hasPrevPage: page > 1,
+                  hasNextPage: thread.length > 0,
+                  nextPage: page + 1,
+                  prevPage: page - 1
                   // authorsNames: authorsNames
                 })
               })
