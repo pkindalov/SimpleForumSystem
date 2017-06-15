@@ -1,8 +1,17 @@
-<form method="POST">
-    Write your answer:
-    <input type="text" name="answer" value="{{answer}}"  /><br />
-    Date:
-    <input type="date" name="date" value="{{date}}" /><br />
-   
-    <input type="submit" value="Save" />
-</form>
+
+<div class="container-fluid">
+    <div class="jumbotron">
+
+        <form method="POST">
+            <div class="form-group">
+                <label for="answer"><h2>Write your answer:</h2></label><br />
+                {{!--<input class="form-control" type="text" name="answer" value="{{answer}}"  /><br />--}}
+                <textarea class="form-control"  rows="10" name="answer" ></textarea>
+            </div>
+            {{!--Date:
+            <input type="date" name="date" value="{{date}}" /><br />--}}
+        
+            <input class="btn btn-primary" type="submit" value="WRITE COMMENT" />
+        </form>
+    </div>
+</div>

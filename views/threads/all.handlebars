@@ -4,14 +4,14 @@
 {{#each threads}}
     <div class="container-fluid">
         <div class="jumbotron">
-            <h4>Title:</h4><br />
-                 <p>{{title}}</p>
+            <h2>Title:</h2><br />
+                 {{title}}
             <hr />     
-            <h4>Date:</h4>
+            {{!--<h4>Date:</h4>
                 <p>{{date}}</p>
-            <hr />   
-            <h4>Description:</h4>
-                <p>{{description}}</p>
+            <hr />   --}}
+            <h2>Description:</h2>
+                {{description}}
              <hr />
              
                 {{!--<h4>Author:</h4>  
@@ -19,7 +19,7 @@
                     <p>{{user.username}}</p>
                      <hr />       --}}
                  
-            <a class="btn btn-default" href="/post/{{_id}}/{{title}}">DETAILS</a>
+            <a class="btn btn-primary" href="/post/{{_id}}/{{title}}">DETAILS</a>
             {{#if ../isAdmin}}
             <a class="btn btn-warning" href="/post/edit/{{_id}}/{{title}}">EDIT</a>
             <a class="btn btn-danger" href="/post/delete/{{_id}}/{{title}}">DELETE</a>

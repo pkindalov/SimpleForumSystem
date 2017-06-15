@@ -1,13 +1,4 @@
-{{#each user}}
-    <div class="container">
-        <h1>
-            {{!--Hello, {{currentUser.username}}--}}
-            {{!--{{username}}--}}
-            {{username}}
-        </h1>
-    </div>
 
-{{/each}}
 
 
 <div class="container">
@@ -18,13 +9,13 @@
     <div class="container-fluid">
         <div class="jumbotron">
             <h2>Title:</h2>
-                <p>{{title}}</p>
+                {{title}}
             <h2>Description</h2>
-                <p>{{description}}</p>
+                {{description}}
                 <hr />
             <h2>Author Comments:</h2>
             {{#each answers}}
-                <p>{{answer}}</p>
+                {{answer}}
             {{/each}}    
 
         </div>

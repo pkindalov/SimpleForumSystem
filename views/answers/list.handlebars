@@ -2,18 +2,18 @@
 {{#each threads}}
 <div class="container-fluid">
     <div class="jumbotron">
-        <h4>Title:</h4><br />
-        <p>{{title}}</p>
+        <h2>Title:</h2>
+        {{title}}
         <hr />
-        <h4>Date:</h4>
-        <p>{{date}}</p>
+        <h2>Date:</h2>
+        {{date}}
         <hr />
-        <h4>Description:</h4>
-        <p>{{description}}</p>
+        <h2>Description:</h2>
+        {{description}}
         <hr />
-        <h4>Comments:</h4>
+        <h2>Comments:</h2>
         {{#each answers}}
-        <p>"{{answer}}" - by {{authorName}}</</p>
+        "{{answer}}" - by {{authorName}}
                             
         {{/each}}
 

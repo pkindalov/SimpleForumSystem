@@ -1,6 +1,15 @@
 
-<form action="/answer/edit/{{id}}/{{title}}" method="POST">
-   Edit answer:
-    <input type="text" name="answer" value="{{answer.answer}}"  /><br />
-    <input type="submit" value="Save" />
-</form>
+<div class="container-fluid">
+    <div class="jumbotron">
+        <div class="form-group">
+            <form action="/answer/edit/{{id}}/{{title}}" method="POST">
+                <label for="answer"><h2> Answer:</h2></label><br />
+                {{!--<input type="text" name="answer" value="{{answer.answer}}"  /><br />--}}
+                <textarea class="form-control" rows="10" name="answer" value="{{answer.answer}}"></textarea>
+        </div>
+                <input class="btn btn-primary" type="submit" value="SAVE CHANGES" />
+            </form>
+
+
+    </div>
+</div>

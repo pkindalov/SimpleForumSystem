@@ -1,14 +1,16 @@
- <div>
+ <div class="container-fluid">
+     <div class="jumbotron">
+
         <h2>Title:</h2><br />
              {{thread.title}}
-        <h2>Date:</h2>
-            {{thread.date}}
+        {{!--<h2>Date:</h2>
+            {{thread.date}}--}}
         <h2>Description:</h2>
             {{thread.description}}<br />
 
-
+        <h2>Comments:</h2>    
             {{#each answers}}
-                <div>
+                <div class="container=fluid">
                     {{answer}}
                      {{#if ../isAdmin}}
                             <a class="btn btn-warning" href="/answer/edit/{{_id}}/{{answer}}">EDIT COMMENT</a>
@@ -16,6 +18,9 @@
                     {{/if}}
                 </div>
             {{/each}}
+     </div>
+
+
          <a class="btn btn-primary" href="/add/answer/{{thread._id}}">ADD COMMENT</a>
 
            {{!--{{#if isAdmin}}
