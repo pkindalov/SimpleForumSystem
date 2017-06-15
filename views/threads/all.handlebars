@@ -27,3 +27,14 @@
         </div>
     </div>
    {{/each}}
+
+
+<div class="container-fluid">
+    {{#if hasPrevPage}}
+    <a class="btn btn-primary" href="/threads/all?page={{prevPage}}">PREV</a>
+    {{/if}}
+
+    {{#if hasNextPage}}
+    <a class="btn btn-primary" href="/threads/all?page={{nextPage}}">NEXT</a>
+    {{/if}}
+</div>

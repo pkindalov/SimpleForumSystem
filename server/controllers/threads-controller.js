@@ -38,10 +38,14 @@ module.exports = {
             })
   },
   allThreads: (req, res) => {
-    let allThreads = Thread.find({})
+    let pageSizes = 2
+    let page = parseInt(req.query.page) || 1
 
+    let allThreads = Thread.find({})
     allThreads
                     .sort({'date': -1})
+                    .skip((page - 1) * pageSizes)
+                    .limit(pageSizes)
                     .then(thread => {
                       User
                           .find({})
@@ -50,7 +54,11 @@ module.exports = {
                             // console.log(user.username)
                             res.render('threads/all', {
                               threads: thread,
-                              user: user
+                              user: user,
+                              hasPrevPage: page > 1,
+                              hasNextPage: thread.length > 0,
+                              nextPage: page + 1,
+                              prevPage: page - 1
                             })
                           })
                     })
