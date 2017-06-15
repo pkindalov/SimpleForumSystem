@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Thread = mongoose.model('Thread')
+const Answer = mongoose.model('Answer')
 const User = mongoose.model('User')
 const errorHandler = require('../utilities/error-handler')
 const ObjectId = mongoose.Schema.Types.ObjectId
@@ -40,10 +41,11 @@ module.exports = {
     let allThreads = Thread.find({})
 
     allThreads
+                    .sort({'date': -1})
                     .then(thread => {
                       User
                           .find({})
-                          .where({'author': ObjectId(thread.author)})
+                          // .where({'author': ObjectId(thread.author)})
                           .then(user => {
                             // console.log(user.username)
                             res.render('threads/all', {
@@ -163,8 +165,15 @@ module.exports = {
     Thread
             .findByIdAndRemove(threadId)
             .then(thread => {
-              res.redirect('/threads/all')
+
             })
+
+    Answer
+                            .find({thread: threadId})
+                            .remove()
+                            .then(
+                                 res.redirect('/threads/all')
+                            )
   }
 
 }

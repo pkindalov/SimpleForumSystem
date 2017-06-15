@@ -94,6 +94,7 @@ module.exports = {
           .then(user => {
             Thread
                         .find({'author': id})
+                        .sort({'date': -1})
                         .populate('answers')
                         // .populate('answers')
                         .then(thread => {
