@@ -28,6 +28,7 @@ module.exports = {
               Answer
                         .create({
                           answer: answer,
+                          thread: id,
                           author: req.user._id,
                           authorName: req.user.firstName
                         })
