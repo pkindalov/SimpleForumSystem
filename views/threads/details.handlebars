@@ -10,8 +10,17 @@
             {{#each answers}}
                 <div>
                     {{answer}}
+                     {{#if ../isAdmin}}
+                            <a class="btn btn-warning" href="/answer/edit/{{_id}}/{{answer}}">EDIT COMMENT</a>
+                            <a class="btn btn-danger" href="/answer/delete/{{_id}}">DELETE COMMENT</a>
+                    {{/if}}
                 </div>
             {{/each}}
-         <a class="btn btn-default" href="/add/answer/{{thread._id}}">Add Comment</a>
+         <a class="btn btn-primary" href="/add/answer/{{thread._id}}">ADD COMMENT</a>
+
+           {{!--{{#if isAdmin}}
+            <a class="btn btn-warning" href="/answer/edit/{{thread._id}}/{{thread.title}}">EDIT COMMENT</a>
+            <a class="btn btn-danger" href="#">DELETE COMMENT</a>
+            {{/if}}--}}
         
     </div>
