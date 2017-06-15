@@ -61,11 +61,109 @@ module.exports = {
             .findById(id)
             .populate('answers')
             .then(thread => {
-              console.log(thread)
+              // console.log(thread)
               res.render('threads/details', {
                 thread: thread,
                 answers: thread.answers
               })
+            })
+  },
+
+  editThreadGet: (req, res) => {
+    let ThreadId = req.params.id
+    let ThreadTitle = req.params.title
+
+    Thread
+             .findById(ThreadId)
+             .then(thread => {
+               res.render('threads/edit', {
+                 thread: thread,
+                 title: ThreadTitle,
+                 id: ThreadId
+               })
+             })
+  },
+
+  editThreadPost: (req, res) => {
+    let updateReq = req.body
+    let adminIp = req.user.id
+    let threadId = req.params.id
+
+    Thread.findById(threadId, function (err, data) {
+      if (err) {
+        console.log(err)
+        return
+      }
+
+      data.title = updateReq.title
+      data.description = updateReq.description
+      data.date = Date.now()
+      data.author = adminIp
+      data.save()
+    })
+    .then(
+      res.redirect('/threads/all')
+    )
+
+    // Thread
+    //         .findById(threadId)
+    //         .then(thread => {
+    //           thread.title = updateReq.title
+    //           thread.description = updateReq.description
+    //           thread.date = Date.now()
+    //           thread.author = adminIp
+    //           thread.save()
+
+    //           res.redirect('threads/all')
+    //         })
+
+    // let query = {id: threadId}
+    // let update = {
+    //   title: updateReq.title,
+    //   description: updateReq.description,
+    //   date: Date.now(),
+    //   author: adminIp
+    // }
+
+    // Thread
+    //         .findOneAndUpdate(query, update)
+    //         .then(thread => {
+    //           res.redirect('threads/all')
+    //         })
+
+    // Thread
+    //           .update({_id: threadId}, {$set: {
+    //             title: updateReq.title,
+    //             description: updateReq.description,
+    //             date: Date.now(),
+    //             author: adminIp
+    //           }})
+    //           .then(
+    //              res.redirect('threads/all')
+    //           )
+
+    // Thread
+    //            .findById(threadId)
+    //            .update({
+    //              title: updateReq.title,
+    //              description: updateReq.description,
+    //              date: Date.now(),
+    //              author: 'Edited by Admin'
+    //            })
+    //            .then(thread => {
+    //              thread.save()
+    //              res.redirect('threads/all')
+    //            })
+  },
+
+  deleteThread: (req, res) => {
+    // let updateReq = req.body
+    let threadId = req.params.id
+
+    Thread
+            .findByIdAndRemove(threadId)
+            .then(thread => {
+              res.redirect('/threads/all')
             })
   }
 
