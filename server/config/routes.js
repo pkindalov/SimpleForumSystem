@@ -15,8 +15,14 @@ module.exports = (app) => {
   app.get('/threads/all', controllers.threads.allThreads)
   app.get('/answers/list', controllers.answers.listAnswersByLatestDate)
   app.get('/post/:id/:title', controllers.threads.getDetails)
+  app.get('/post/edit/:id/:title', controllers.threads.editThreadGet)
+  app.post('/post/edit/:id/:title', controllers.threads.editThreadPost)
+  app.get('/post/delete/:id/:title', controllers.threads.deleteThread)
   app.get('/add/answer/:id', controllers.answers.addComment)
   app.post('/add/answer/:id', controllers.answers.postComment)
+  app.get('/answer/edit/:id/:title', controllers.answers.editAnswerGet)
+  app.post('/answer/edit/:id', controllers.answers.editAnswerPost)
+  app.get('/answer/delete/:id', controllers.answers.deletePost)
   app.get('/users/profile/:username', auth.isAuthenticated, controllers.users.getUserProfil)
 
   app.all('*', (req, res) => {
