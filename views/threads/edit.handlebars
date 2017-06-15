@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="jumbotron">
+
+        <form action="/post/edit/{{id}}/{{title}}"" method="POST">
+            <div class="form-group">
+                <label for="title">Title:</label><br />
+                <input class="form-group" type="text" name="title" value="{{title}}" placeholder="Title"  /><br />
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description:</label><br />
+                <input class="form-group" type="text" name="description" value="{{thread.description}}" placeholder="Descripton" /><br />
+            </div>   
+
+            
+        
+            {{!--Date:
+            <input type="date" name="date" value="{{thread.date}}" /><br />--}}       
+            <input class="btn btn-primary" type="submit" value="SAVE CHANGES" />
+        </form> 
+
+
+    </div>
+</div>
