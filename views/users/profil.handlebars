@@ -21,3 +21,12 @@
         </div>
     </div>
 {{/each}}
+
+{{#if hasPrev}}
+    <a class="btn btn-primary" href="/users/profile/:username?page={{prevPage}}">PREV</a>
+{{/if}}
+
+{{#if hasNext}}
+    <a class="btn btn-primary" href="/users/profile/:username?page={{nextPage}}">NEXT</a>
+{{/if}}
+

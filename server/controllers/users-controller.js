@@ -72,8 +72,10 @@ module.exports = {
 
   getUserProfil: (req, res) => {
     // let userName = req.params.username
-    let id = req.user._id
-    console.log(id)
+    let id = req.user.id
+    let pageSize = 2
+    let page = parseInt(req.query.page) || 1
+    // console.log(id)
 
     // Thread
     //           .find({'author': ObjectId('id')})
@@ -96,12 +98,18 @@ module.exports = {
                         .find({'author': id})
                         .sort({'date': -1})
                         .populate('answers')
+                        .skip((page - 1) * pageSize)
+                        .limit(pageSize)
                         // .populate('answers')
                         .then(thread => {
                           // console.log(thread)
                           res.render('users/profil', {
                             thread: thread,
-                            user: user
+                            user: user,
+                            hasPrev: page > 1,
+                            hasNext: thread.length > 0,
+                            nextPage: page + 1,
+                            prevPage: page - 1
                           })
                         })
           })
