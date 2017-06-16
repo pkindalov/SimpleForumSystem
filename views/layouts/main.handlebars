@@ -28,6 +28,11 @@
                 <li><a href="/users/register">REGISTER</a></li>
                 <li><a href="/users/login">LOGIN</a></li>
             {{/if}}
+             {{#if isAdmin}}
+                <li><a href="/admins/list">ADMINS LIST</a></li>
+                <li><a href="/admins/add">ADD ADMIN</a></li>
+            {{/if}}
+           
         </ul>
     </div>
     
