@@ -13,6 +13,9 @@
             <h2>Description:</h2>
                 {{description}}
              <hr />
+
+             Views of this thread: {{views}}<br />
+             <br />
              
                 {{!--<h4>Author:</h4>  
                 
@@ -20,6 +23,13 @@
                      <hr />       --}}
                  
             <a class="btn btn-primary" href="/post/{{_id}}/{{title}}">DETAILS</a>
+        
+            {{#if ../currentUser}}
+                <a class="btn btn-default" href="#">LIKE</a>
+                <a class="btn btn-default" href="#">DISLIKE</a>
+            {{/if}}
+
+
             {{#if ../isAdmin}}
             <a class="btn btn-warning" href="/post/edit/{{_id}}/{{title}}">EDIT</a>
             <a class="btn btn-danger" href="/post/delete/{{_id}}/{{title}}">DELETE</a>
