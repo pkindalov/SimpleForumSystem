@@ -1,0 +1,20 @@
+<div class="container-fluid">
+    <h2>All current registered users: </h2>
+    <div class="jumbotron">
+        {{#each user}}
+        <li> <a href="/users/profile/{{username}}">{{username}}</a></li>
+        {{/each}}
+    </div>
+
+    <div class="jumbotron">
+        <h2>Enter a nickname of user who will be an admin:</h2>
+            <form method="POST">
+                 <div class="form-group">
+                    <label for="username"></label><br />
+                    <input class="form-control" type="text" name="username" /><br />
+                    <input class="btn btn-primary" type="submit" value="MAKE ADMIN" />
+
+                 </div>
+            </form>
+    </div>
+</div>
