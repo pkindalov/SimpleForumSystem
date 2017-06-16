@@ -22,12 +22,22 @@ module.exports = {
               })
   },
 
+  removeAdminGet: (req, res) => {
+    User
+              .find({})
+              .then(user => {
+                res.render('admins/remove', {
+                  user: user
+                })
+              })
+  },
+
   addAdminPost: (req, res) => {
     let reqBody = req.body
     let username = reqBody.username
 
     User
-          .update({'username': username}, {$set: {'roles': 'Admin'} })
+          .update({'username': username}, { $set: {'roles': 'Admin'} })
           .then(user => {
             res.redirect('/admins/list')
           })
@@ -46,6 +56,17 @@ module.exports = {
     //           .then(
     //             res.redirect('/admins/list')
     //           )
+  },
+
+  removeAdminPost: (req, res) => {
+    let reqBody = req.body
+    let username = reqBody.username
+
+    User
+              .update({'username': username}, { $set: {'roles': ' '}})
+              .then(user => {
+                res.redirect('/admins/list')
+              })
   }
 
 }
