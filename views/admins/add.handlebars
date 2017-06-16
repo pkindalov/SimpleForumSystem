@@ -6,15 +6,31 @@
         {{/each}}
     </div>
 
+    {{!--<div class="jumbotron">
+        {{#each user}}
+            <select>
+                <option value="{{username}}">{{username}}</option>
+            </select>
+        {{/each}}
+    </div>--}}
+
+
     <div class="jumbotron">
         <h2>Enter a nickname of user who will be an admin:</h2>
             <form method="POST">
                  <div class="form-group">
-                    <label for="username"></label><br />
-                    <input class="form-control" type="text" name="username" /><br />
-                    <input class="btn btn-primary" type="submit" value="MAKE ADMIN" />
-
+                    {{!--<label for="username"></label><br />--}}
+                         <select class="form-control" name="username">
+                              {{#each user}}
+                            <option value="{{username}}">{{username}}</option>
+                             {{/each}}
+                         </select>
+                    {{!--<input class="form-control" type="text" name="username" /><br />--}}
                  </div>
+                    <input class="btn btn-primary" type="submit" value="MAKE ADMIN" />
             </form>
+
+          <div class="container"> If you want to REMOVE user as admin click  <a href="/admins/remove">here</a></div>
     </div>
 </div>
+
