@@ -1,0 +1,34 @@
+<div class="container-fluid">
+    <h2>All current registered users: </h2>
+    <div class="jumbotron">
+        {{#each user}}
+        <li> <a href="/users/profile/{{username}}">{{username}}</a></li>
+        {{/each}}
+    </div>
+
+    {{!--<div class="jumbotron">
+        {{#each user}}
+            <select>
+                <option value="{{username}}">{{username}}</option>
+            </select>
+        {{/each}}
+    </div>--}}
+
+
+    <div class="jumbotron">
+        <h2>Enter a nickname of user who will be REMOVED as  admin:</h2>
+            <form method="POST">
+                 <div class="form-group">
+                    {{!--<label for="username"></label><br />--}}
+                         <select class="form-control" name="username">
+                              {{#each user}}
+                            <option value="{{username}}">{{username}}</option>
+                             {{/each}}
+                         </select>
+                    {{!--<input class="form-control" type="text" name="username" /><br />--}}
+                 </div>
+                    <input class="btn btn-danger" type="submit" value="REMOVE ADMIN" />
+            </form>
+    </div>
+</div>
+
