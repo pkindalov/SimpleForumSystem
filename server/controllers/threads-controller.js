@@ -25,7 +25,8 @@ module.exports = {
               title: threadReq.title,
               description: threadReq.description,
               date: threadReq.date,
-              author: req.user._id
+              author: req.user._id,
+              views: 0
 
             })
             .then(thread => {
@@ -68,15 +69,21 @@ module.exports = {
     let id = req.params.id
 
     Thread
+           .findByIdAndUpdate(id, {$inc: {views: 1}}, function (err, data) {
+             if (err) {
+               console.log(err)
+             }
+
+             Thread
             .findById(id)
             .populate('answers')
             .then(thread => {
-              // console.log(thread)
               res.render('threads/details', {
                 thread: thread,
                 answers: thread.answers
               })
             })
+           })
   },
 
   editThreadGet: (req, res) => {
