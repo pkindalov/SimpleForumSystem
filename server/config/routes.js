@@ -24,6 +24,9 @@ module.exports = (app) => {
   app.post('/answer/edit/:id', controllers.answers.editAnswerPost)
   app.get('/answer/delete/:id', controllers.answers.deletePost)
   app.get('/users/profile/:username', auth.isAuthenticated, controllers.users.getUserProfil)
+  app.get('/admins/list', auth.isInRole('Admin'), controllers.admins.listAllCurrentAdmins)
+  app.get('/admins/add', auth.isInRole('Admin'), controllers.admins.addAdmin)
+  app.post('/admins/add', auth.isInRole('Admin'), controllers.admins.addAdminPost)
 
   app.all('*', (req, res) => {
     res.status(404)
