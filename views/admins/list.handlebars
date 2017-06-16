@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <h2>List of all current admins:</h2>
+    <div class="jumbotron">
+        {{#each user}}
+        <ul>
+            <li>
+                <a href="/users/profile/{{username}}">{{username}}</a>
+                </li>
+        </ul>
+        {{/each}}
+    </div>
+</div>
