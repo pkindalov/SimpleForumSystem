@@ -7,7 +7,8 @@ let threadSchema = new mongoose.Schema({
   description: {type: String},
   date: {type: Date, default: Date.now},
   answers: [{type: ObjectId, ref: 'Answer'}],
-  author: {type: ObjectId, ref: 'User'}
+  author: {type: ObjectId, ref: 'User'},
+  views: {type: Number}
 })
 
 let Thread = mongoose.model('Thread', threadSchema)
