@@ -63,7 +63,7 @@ module.exports = {
     let username = reqBody.username
 
     User
-              .update({'username': username}, { $set: {'roles': ' '}})
+              .update({'username': username}, { $set: {'roles': ' '} })
               .then(user => {
                 res.redirect('/admins/list')
               })
