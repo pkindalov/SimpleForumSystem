@@ -26,7 +26,7 @@
             <a class="btn btn-primary" href="/post/{{_id}}/{{title}}">DETAILS</a>
         
             {{#if ../currentUser }}
-                {{#if ../rightToVoteUp}}
+                {{#if ./rightToVoteUp}}
                 <a class="btn btn-default" href="/post/like/{{_id}}/{{title}}">LIKE</a>
                 {{/if}}
                 <a class="btn btn-default" href="#">DISLIKE</a>
