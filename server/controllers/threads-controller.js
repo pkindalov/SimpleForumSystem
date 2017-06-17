@@ -43,45 +43,87 @@ module.exports = {
   allThreads: (req, res) => {
     let pageSizes = 2
     let page = parseInt(req.query.page) || 1
-    // let rightToVoteUp = true
 
-    let rightToVoteUp = true
+    // let rightToVoteUp = true
     let allThreads = Thread.find({})
+
+    try {
+
+    } catch (err) {
+      console.log(err)
+    }
+
     allThreads
                     .sort({'date': -1})
                     .skip((page - 1) * pageSizes)
                     .limit(pageSizes)
                     .then(thread => {
-                      // console.log(thread[0].likers)
                       try {
                         let userId = req.user.id
-                        if (userId) {
-                          // console.log(req.user.id)
-                          for (let t of thread) {
-                            // console.log(t)
-                          // console.log(t.likers)
-                            for (let l of t.likers) {
-                              // console.log(t.likers)
-                              // console.log(l === userId)
-                              // console.log('l is: ' + l)
-                              // console.log('userId is: ' + userId)
-                              if (l === userId) {
-                                rightToVoteUp = false
-                                thread.rightToVoteUp = rightToVoteUp
-                                thread.save()
-                                break
-                              }
-                            }
-                          }
-                        }
-                      } catch (ex) {
 
+                        User
+                                .findById(userId)
+                                .then(user => {
+                                  // console.log(thread)
+                                  for (let t of thread) {
+                                    // console.log(t)
+                                    for (let userLike of user.likedThreads) {
+                                        // console.log('thread id: ' + t.id)
+                                        // console.log('user like: ' + userLike)
+                                      if (t.id === userLike) {
+                                        // console.log('we are here')
+                                        t.rightToVoteUp = false
+                                          // t.save()
+                                        break
+                                      }
+                                    }
+                                  }
+                                  // for (let like of user.likedThreads) {
+                                  //   console.log('like is ' + like)
+                                  //   console.log('thread id is: ' + userId)
+                                  //   if (like === userId) {
+                                  //     rightToVoteUp = false
+                                  //     break
+                                  //   }
+                                  // }
+                                })
+                      } catch (err) {
+                        console.log(err)
                       }
+
+                      // console.log(thread[0].likers)
+                      // try {
+                      //   let userId = req.user.id
+                      //   if (userId) {
+                      //     // console.log(req.user.id)
+                      //     for (let t of thread) {
+                      //       console.log(t)
+                      //       console.log('Thread id: ' + t.id)
+                      //       // console.log(t.likers)
+                      //       for (let l of t.likers) {
+                      //         // console.log(t.likers)
+                      //         // console.log(l === userId)
+                      //         // console.log('l is: ' + l)
+                      //         // console.log('userId is: ' + userId)
+                      //         if (l === userId) {
+                      //           rightToVoteUp = false
+
+                      //           thread[t.id].rightToVoteUp = rightToVoteUp
+                      //           thread[t.id].save()
+                      //           break
+                      //         }
+                      //       }
+                      //     }
+                      //   }
+                      // } catch (ex) {
+
+                      // }
 
                       User
                           .find({})
                           // .where({'author': ObjectId(thread.author)})
                           .then(user => {
+                            // console.log('debug')
                            // here to check if user haveRightToVote
                             res.render('threads/all', {
                               threads: thread,
@@ -89,8 +131,8 @@ module.exports = {
                               hasPrevPage: page > 1,
                               hasNextPage: thread.length > 0,
                               nextPage: page + 1,
-                              prevPage: page - 1,
-                              rightToVoteUp: rightToVoteUp
+                              prevPage: page - 1
+                              // rightToVoteUp: rightToVoteUp
                             })
                           })
                     })
@@ -225,6 +267,13 @@ module.exports = {
   addLikes: (req, res) => {
     let userID = req.user.id
     let threadId = req.params.id
+
+    User
+            .findByIdAndUpdate(userID, {$push: {likedThreads: threadId}}, function (err, data) {
+              if (err) {
+                console.log(err)
+              }
+            })
 
     Thread
            .findByIdAndUpdate(threadId, {$inc: {likesCount: 1}, $push: {likers: userID}}, function (err, data) {
