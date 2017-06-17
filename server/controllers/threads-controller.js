@@ -3,7 +3,7 @@ const Thread = mongoose.model('Thread')
 const Answer = mongoose.model('Answer')
 const User = mongoose.model('User')
 const errorHandler = require('../utilities/error-handler')
-const ObjectId = mongoose.Schema.Types.ObjectId
+// const ObjectId = mongoose.Schema.Types.ObjectId
 
 module.exports = {
   addTreadGet: (req, res) => {
@@ -26,8 +26,10 @@ module.exports = {
               description: threadReq.description,
               date: threadReq.date,
               author: req.user._id,
-              views: 0
-
+              views: 0,
+              likesCount: 0,
+              likers: [],
+              rightToVoteUp: true
             })
             .then(thread => {
               res.redirect('/threads/all')
@@ -41,25 +43,54 @@ module.exports = {
   allThreads: (req, res) => {
     let pageSizes = 2
     let page = parseInt(req.query.page) || 1
+    // let rightToVoteUp = true
 
+    let rightToVoteUp = true
     let allThreads = Thread.find({})
     allThreads
                     .sort({'date': -1})
                     .skip((page - 1) * pageSizes)
                     .limit(pageSizes)
                     .then(thread => {
+                      // console.log(thread[0].likers)
+                      try {
+                        let userId = req.user.id
+                        if (userId) {
+                          // console.log(req.user.id)
+                          for (let t of thread) {
+                            // console.log(t)
+                          // console.log(t.likers)
+                            for (let l of t.likers) {
+                              // console.log(t.likers)
+                              // console.log(l === userId)
+                              // console.log('l is: ' + l)
+                              // console.log('userId is: ' + userId)
+                              if (l === userId) {
+                                rightToVoteUp = false
+                                thread.rightToVoteUp = rightToVoteUp
+                                thread.save()
+                                break
+                              }
+                            }
+                          }
+                        }
+                      } catch (ex) {
+
+                      }
+
                       User
                           .find({})
                           // .where({'author': ObjectId(thread.author)})
                           .then(user => {
-                            // console.log(user.username)
+                           // here to check if user haveRightToVote
                             res.render('threads/all', {
                               threads: thread,
                               user: user,
                               hasPrevPage: page > 1,
                               hasNextPage: thread.length > 0,
                               nextPage: page + 1,
-                              prevPage: page - 1
+                              prevPage: page - 1,
+                              rightToVoteUp: rightToVoteUp
                             })
                           })
                     })
@@ -189,6 +220,31 @@ module.exports = {
                             .then(
                                  res.redirect('/threads/all')
                             )
+  },
+
+  addLikes: (req, res) => {
+    let userID = req.user.id
+    let threadId = req.params.id
+
+    Thread
+           .findByIdAndUpdate(threadId, {$inc: {likesCount: 1}, $push: {likers: userID}}, function (err, data) {
+             if (err) {
+               console.log(err)
+             }
+
+             Thread
+            .findById(threadId)
+            .populate('answers')
+            .then(thread => {
+              res.redirect('/threads/all')
+              // res.render('threads/likes', {
+              //   thread: thread,
+              //   answers: thread.answers
+              // })
+            })
+           })
+
+    // res.render('threads/likes')
   }
 
 }
