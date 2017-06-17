@@ -8,7 +8,11 @@ let threadSchema = new mongoose.Schema({
   date: {type: Date, default: Date.now},
   answers: [{type: ObjectId, ref: 'Answer'}],
   author: {type: ObjectId, ref: 'User'},
-  views: {type: Number}
+  views: {type: Number},
+  likesCount: {type: Number},
+  likers: [],
+  rightToVoteUp: {type: Boolean}
+
 })
 
 let Thread = mongoose.model('Thread', threadSchema)
