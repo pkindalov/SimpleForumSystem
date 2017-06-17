@@ -29,6 +29,7 @@ module.exports = (app) => {
   app.post('/admins/add', auth.isInRole('Admin'), controllers.admins.addAdminPost)
   app.get('/admins/remove', auth.isInRole('Admin'), controllers.admins.removeAdminGet)
   app.post('/admins/remove', auth.isInRole('Admin'), controllers.admins.removeAdminPost)
+  app.get('/post/like/:id/:title', auth.isAuthenticated, controllers.threads.addLikes)
 
   app.all('*', (req, res) => {
     res.status(404)
