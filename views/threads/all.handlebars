@@ -15,6 +15,7 @@
              <hr />
 
              Views of this thread: {{views}}<br />
+             Likes: {{likesCount}}
              <br />
              
                 {{!--<h4>Author:</h4>  
@@ -24,8 +25,10 @@
                  
             <a class="btn btn-primary" href="/post/{{_id}}/{{title}}">DETAILS</a>
         
-            {{#if ../currentUser}}
-                <a class="btn btn-default" href="#">LIKE</a>
+            {{#if ../currentUser }}
+                {{#if ../rightToVoteUp}}
+                <a class="btn btn-default" href="/post/like/{{_id}}/{{title}}">LIKE</a>
+                {{/if}}
                 <a class="btn btn-default" href="#">DISLIKE</a>
             {{/if}}
 
